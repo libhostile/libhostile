@@ -1,0 +1,71 @@
+# vim:ft=automake
+# libhostile
+# Copyright (C) 2011 - 2013 Data Differential
+# All rights reserved.
+#
+# Use and distribution licensed under the BSD license.  See
+# the COPYING file in the parent directory for full text.
+#
+# Included from Top Level Makefile.am
+# All paths should be given relative to the root
+
+# Unit tests
+include src/t/include.am
+
+check_LTLIBRARIES= src/libhostile.la
+
+noinst_HEADERS+= src/accept.h
+noinst_HEADERS+= src/action.h
+noinst_HEADERS+= src/called.h
+noinst_HEADERS+= src/close.h
+noinst_HEADERS+= src/connect.h
+noinst_HEADERS+= src/function.h
+noinst_HEADERS+= src/getaddrinfo.h
+noinst_HEADERS+= src/hostile.h
+noinst_HEADERS+= src/initialize.h
+noinst_HEADERS+= src/malloc.h
+noinst_HEADERS+= src/pipe.h
+noinst_HEADERS+= src/poll.h
+noinst_HEADERS+= src/realloc.h
+noinst_HEADERS+= src/recv.h
+noinst_HEADERS+= src/send.h
+noinst_HEADERS+= src/setsockopt.h
+noinst_HEADERS+= src/socket.h
+noinst_HEADERS+= src/socket_server.h
+noinst_HEADERS+= src/sync.h
+noinst_HEADERS+= src/visibility.h
+noinst_HEADERS+= src/write.h
+
+src_libhostile_la_CFLAGS=
+src_libhostile_la_CXXFLAGS=
+src_libhostile_la_LIBADD=
+src_libhostile_la_SOURCES=
+
+src_libhostile_la_CFLAGS+= -DBUILDING_LIBHOSTILE
+src_libhostile_la_CXXFLAGS+= -DBUILDING_LIBHOSTILE
+
+src_libhostile_la_CFLAGS+= @PTHREAD_CFLAGS@
+src_libhostile_la_CXXFLAGS+= @PTHREAD_CFLAGS@
+
+src_libhostile_la_SOURCES+= src/initialize.c
+
+src_libhostile_la_LIBADD+= @lt_cv_dlopen_libs@
+src_libhostile_la_LIBADD+= @RT_LIB@
+src_libhostile_la_LIBADD+= @PTHREAD_LIBS@
+
+src_libhostile_la_SOURCES+= src/accept.c
+src_libhostile_la_SOURCES+= src/called.c
+src_libhostile_la_SOURCES+= src/close.c
+src_libhostile_la_SOURCES+= src/connect.c
+src_libhostile_la_SOURCES+= src/function.c
+src_libhostile_la_SOURCES+= src/getaddrinfo.c
+src_libhostile_la_SOURCES+= src/malloc.c
+src_libhostile_la_SOURCES+= src/pipe.c
+src_libhostile_la_SOURCES+= src/poll.c
+src_libhostile_la_SOURCES+= src/realloc.c
+src_libhostile_la_SOURCES+= src/recv.c
+src_libhostile_la_SOURCES+= src/send.c
+src_libhostile_la_SOURCES+= src/socket.c
+src_libhostile_la_SOURCES+= src/socket_server.c
+src_libhostile_la_SOURCES+= src/setsockopt.c
+src_libhostile_la_SOURCES+= src/write.c

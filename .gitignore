@@ -30,3 +30,35 @@
 
 # Debug files
 *.dSYM/
+
+Makefile
+Makefile.in
+aclocal.m4
+aminclude.am
+autom4te.cache/
+build-aux/
+config.h
+config.in
+config.in~
+config.log
+config.status
+configure
+libhostile-config
+libtool
+m4/libtool.m4
+m4/ltoptions.m4
+m4/ltsugar.m4
+m4/ltversion.m4
+m4/lt~obsolete.m4
+src/.deps/
+src/.dirstamp
+src/t/.deps/
+src/t/.dirstamp
+stamp-h1
+src/t/accept
+src/t/close
+src/t/hostile_accept
+src/t/hostile_pipe2
+src/t/pipe
+src/t/pipe2
+*.swp

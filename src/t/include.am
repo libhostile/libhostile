@@ -1,0 +1,100 @@
+# vim:ft=automake
+# libhostile
+# Copyright (C) 2012 Data Differential
+# All rights reserved.
+#
+# Use and distribution licensed under the BSD license.  See
+# the COPYING file in the parent directory for full text.
+#
+# Included from Top Level Makefile.am
+# All paths should be given relative to the root
+
+# Test accept()
+src_t_accept_SOURCES=
+src_t_accept_LDADD=
+
+src_t_accept_SOURCES+= src/t/accept.c
+check_PROGRAMS+= src/t/accept
+noinst_PROGRAMS+= src/t/accept
+
+src_t_hostile_accept_SOURCES=
+src_t_hostile_accept_LDADD=
+src_t_hostile_accept_CFLAGS= -DHOSTILE
+src_t_hostile_accept_CXXFLAGS= -DHOSTILE
+
+src_t_hostile_accept_SOURCES+= src/t/accept.c
+src_t_hostile_accept_LDADD+= src/libhostile.la
+check_PROGRAMS+= src/t/hostile_accept
+noinst_PROGRAMS+= src/t/hostile_accept
+
+# Test pipe() 
+src_t_pipe_SOURCES=
+src_t_pipe_LDADD=
+
+src_t_pipe_SOURCES+= src/t/pipe.c
+check_PROGRAMS+= src/t/pipe
+noinst_PROGRAMS+= src/t/pipe
+
+src_t_hostile_pipe_SOURCES=
+src_t_hostile_pipe_LDADD=
+src_t_hostile_pipe_CFLAGS=
+src_t_hostile_pipe_CXXFLAGS=
+
+src_t_hostile_pipe_SOURCES+= src/t/pipe.c
+src_t_hostile_pipe_CFLAGS+= -DHOSTILE
+src_t_hostile_pipe_CXXFLAGS+= -DHOSTILE
+src_t_hostile_pipe_LDADD+= src/libhostile.la
+check_PROGRAMS+= src/t/hostile_pipe
+noinst_PROGRAMS+= src/t/hostile_pipe
+
+gdb-pipe: src/t/hostile_pipe
+	@$(GDB_COMMAND) src/t/hostile_pipe
+
+# Test pipe2() 
+src_t_pipe2_SOURCES=
+src_t_pipe2_LDADD=
+
+src_t_pipe2_SOURCES+= src/t/pipe2.c
+check_PROGRAMS+= src/t/pipe2
+noinst_PROGRAMS+= src/t/pipe2
+
+src_t_hostile_pipe2_SOURCES=
+src_t_hostile_pipe2_LDADD=
+src_t_hostile_pipe2_CFLAGS=
+src_t_hostile_pipe2_CXXFLAGS=
+
+src_t_hostile_pipe2_SOURCES+= src/t/pipe2.c
+src_t_hostile_pipe2_CFLAGS+= -DHOSTILE
+src_t_hostile_pipe2_CXXFLAGS+= -DHOSTILE
+src_t_hostile_pipe2_LDADD+= src/libhostile.la
+check_PROGRAMS+= src/t/hostile_pipe2
+noinst_PROGRAMS+= src/t/hostile_pipe2
+
+# Test close() 
+src_t_close_SOURCES=
+src_t_close_LDADD=
+
+src_t_close_SOURCES+= src/t/close.c
+check_PROGRAMS+= src/t/close
+noinst_PROGRAMS+= src/t/close
+
+src_t_hostile_close_SOURCES=
+src_t_hostile_close_LDADD=
+src_t_hostile_close_CFLAGS=
+src_t_hostile_close_CXXFLAGS=
+
+src_t_hostile_close_SOURCES+= src/t/close.c
+src_t_hostile_close_CFLAGS+= -DHOSTILE
+src_t_hostile_close_CXXFLAGS+= -DHOSTILE
+src_t_hostile_close_LDADD+= src/libhostile.la
+check_PROGRAMS+= src/t/hostile_close
+noinst_PROGRAMS+= src/t/hostile_close
+
+# Test just the hostile unit tests
+unit_hostile: src/t/hostile_accept src/t/accept src/t/pipe src/t/hostile_pipe src/t/pipe2 src/t/hostile_pipe2 src/t/close src/t/hostile_close
+	@src/t/accept
+	@src/t/pipe
+	@src/t/pipe2
+	@src/t/hostile_accept
+	@src/t/hostile_pipe
+	@src/t/hostile_pipe2
