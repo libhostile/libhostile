@@ -55,7 +55,7 @@ static void set_local(void)
   __function= set_function("realloc", "HOSTILE_REALLOC");
 }
 
-void *realloc(void *old_ptr, size_t size)
+void LIBHOSTILE_API *realloc(void *old_ptr, size_t size)
 {
   hostile_initialize();
   (void) pthread_once(&function_lookup_once, set_local);

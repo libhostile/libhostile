@@ -60,7 +60,7 @@ static void set_local(void)
   __function= set_function("close", "HOSTILE_CLOSE");
 }
 
-int close(int fd_)
+int LIBHOSTILE_API close(int fd_)
 {
 
   hostile_initialize();

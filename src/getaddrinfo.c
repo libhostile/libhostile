@@ -75,7 +75,7 @@ void set_getaddrinfo_error(bool arg, int frequency, int not_until_arg)
   }
 }
 
-int getaddrinfo(const char *node, const char *service,
+int LIBHOSTILE_API getaddrinfo(const char *node, const char *service,
                 const struct addrinfo *hints,
                 struct addrinfo **res)
 {

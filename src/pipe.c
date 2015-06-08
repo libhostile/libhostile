@@ -65,7 +65,7 @@ static void set_local(void)
 #endif
 }
 
-int pipe(int pipefd_arg[2])
+int LIBHOSTILE_API pipe(int pipefd_arg[2])
 {
   hostile_initialize();
 
@@ -98,7 +98,7 @@ int pipe(int pipefd_arg[2])
 }
 
 #if defined(HAVE_PIPE2) && HAVE_PIPE2
-int pipe2(int pipefd_arg[2], int flags)
+int LIBHOSTILE_API pipe2(int pipefd_arg[2], int flags)
 {
   hostile_initialize();
 

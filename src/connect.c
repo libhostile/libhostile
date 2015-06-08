@@ -72,7 +72,7 @@ void set_connect_close(bool arg, int frequency, int not_until_arg)
   }
 }
 
-int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
+int LIBHOSTILE_API connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
 {
   hostile_initialize();
 

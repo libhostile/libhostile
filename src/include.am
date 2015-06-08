@@ -12,7 +12,7 @@
 # Unit tests
 include src/t/include.am
 
-check_LTLIBRARIES= src/libhostile.la
+lib_LTLIBRARIES+= src/libhostile.la
 
 noinst_HEADERS+= src/accept.h
 noinst_HEADERS+= src/action.h
@@ -69,3 +69,5 @@ src_libhostile_la_SOURCES+= src/socket.c
 src_libhostile_la_SOURCES+= src/socket_server.c
 src_libhostile_la_SOURCES+= src/setsockopt.c
 src_libhostile_la_SOURCES+= src/write.c
+
+src_libhostile_la_LDFLAGS= -version-info ${LIBHOSTILE_LIBRARY_VERSION}

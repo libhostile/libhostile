@@ -60,7 +60,7 @@ static void set_local(void)
   __function= set_function("socket", "HOSTILE_SOCKET");
 }
 
-int socket(int domain_, int type_, int protocol_)
+int LIBHOSTILE_API socket(int domain_, int type_, int protocol_)
 {
 
   hostile_initialize();

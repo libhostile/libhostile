@@ -56,7 +56,7 @@ static void set_malloc(void)
   __function= set_function("malloc", "HOSTILE_MALLOC");
 }
 
-void *malloc(size_t size)
+void LIBHOSTILE_API *malloc(size_t size)
 {
   hostile_initialize();
   (void) pthread_once(&function_lookup_once, set_malloc);

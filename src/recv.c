@@ -91,7 +91,7 @@ void set_recv_close(bool arg, int frequency, int not_until_arg)
   }
 }
 
-ssize_t recv(int sockfd, void *buf, size_t len, int flags)
+ssize_t LIBHOSTILE_API recv(int sockfd, void *buf, size_t len, int flags)
 {
 
   hostile_initialize();

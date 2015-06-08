@@ -55,8 +55,10 @@ LIBHOSTILE_LIBRARY_VERSION=1:0:0
 AC_SUBST([LIBHOSTILE_LIBRARY_VERSION])
 
 LT_PREREQ([2.2])
-LT_INIT
+LT_INIT([dlopen])
 LT_LANG([C++])
+
+AC_SUBST([lt_cv_dlopen_libs])
 
 AC_PROG_CC_C99
 AS_IF([test "x${ac_cv_prog_cc_c99}" == "xno"],[AC_MSG_ERROR([No c99 compatible compiler found])])
@@ -77,6 +79,18 @@ CHECK_FOR_MINGW
 # Specialty checks
 AX_CXX_CINTTYPES
 
+# Check for -lrt
+AC_CHECK_LIB([rt],[clock_gettime],
+             [AX_SAVE_FLAGS
+              LIBS="$LIB -lrt"
+              AC_CHECK_FUNCS([clock_gettime])
+              AX_RESTORE_FLAGS
+
+              AC_SUBST([RT_LIB],[-lrt])
+              AC_DEFINE([HAVE_LIBRT],[1],[Have -lrt])
+             ],
+             [AC_CHECK_FUNCS([clock_gettime])])
+
 # Checks for programs.
 AC_CHECK_PROGS([LSB_RELEASE],[lsb_release])
 AC_CHECK_PROGS([DPKG_GENSYMBOLS],[dpkg-gensymbols])
@@ -92,6 +106,7 @@ AX_CXX_GCC_ABI_DEMANGLE
 
 # Checks for header files.
 AC_CHECK_HEADERS_ONCE([features.h])
+AC_CHECK_HEADERS_ONCE([sys/socket.h])
 
 #  We use the header to cross test our m4 rules that also test
 AC_DEFUN([CHECK_FOR_CXXABI],

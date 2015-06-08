@@ -59,7 +59,7 @@ static void set_local(void)
 #define __WRITE_DEFAULT_ERROR ECONNRESET
 static __thread int __default_error= __WRITE_DEFAULT_ERROR;
 
-ssize_t write(int fd, const void *buf, size_t count)
+ssize_t LIBHOSTILE_API write(int fd, const void *buf, size_t count)
 {
   hostile_initialize();
   (void) pthread_once(&function_lookup_once, set_local);

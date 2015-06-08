@@ -93,7 +93,7 @@ void set_accept_close(bool arg, int frequency, int not_until_arg)
   }
 }
 
-int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
+int LIBHOSTILE_API accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
 {
 
   hostile_initialize();
@@ -132,7 +132,7 @@ int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
 }
 
 #if defined(HAVE_ACCEPT4) && HAVE_ACCEPT4
-int accept4(int sockfd, struct sockaddr *addr, socklen_t *addrlen, int flags)
+int LIBHOSTILE_API accept4(int sockfd, struct sockaddr *addr, socklen_t *addrlen, int flags)
 {
 
   hostile_initialize();
