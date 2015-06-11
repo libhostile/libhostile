@@ -36,7 +36,6 @@
 
 #pragma once
 
-#include "src/called.h"
 #include "src/hostile.h"
 
 #ifdef __cplusplus

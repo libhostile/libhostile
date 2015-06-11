@@ -84,46 +84,41 @@ int poll(struct pollfd *fds, nfds_t nfds, int timeout)
 
   (void) pthread_once(&function_lookup_once, set_local);
 
-  if (is_called() == false)
+  if (__function.frequency)
   {
-    if (__function.frequency)
+    if ((--not_until) < 0 && !(rand() % __function.frequency))
     {
-      if (--not_until < 0 && random() % __function.frequency)
+      for (nfds_t x= 0; x < nfds; nfds++)
       {
-        for (nfds_t x= 0; x < nfds; nfds++)
+        switch (hostile_poll_type)
         {
-          switch (hostile_poll_type)
-          {
-            case HOSTILE_POLL_CLOSED:
-              shutdown(fds[x].fd, SHUT_RDWR);
-              close(fds[x].fd);
-              fds[x].revents= POLLIN|POLLHUP;
-              break;
+          case HOSTILE_POLL_CLOSED:
+            shutdown(fds[x].fd, SHUT_RDWR);
+            close(fds[x].fd);
+            fds[x].revents= POLLIN|POLLHUP;
+            break;
 
-            case HOSTILE_POLL_SHUT_WR:
-              shutdown(fds[x].fd, SHUT_WR);
-              close(fds[x].fd);
-              fds[x].revents= POLLIN;
-              break;
+          case HOSTILE_POLL_SHUT_WR:
+            shutdown(fds[x].fd, SHUT_WR);
+            close(fds[x].fd);
+            fds[x].revents= POLLIN;
+            break;
 
-            case HOSTILE_POLL_SHUT_RD:
-              shutdown(fds[x].fd, SHUT_RD);
-              fds[x].revents= POLLIN;
-              break;
+          case HOSTILE_POLL_SHUT_RD:
+            shutdown(fds[x].fd, SHUT_RD);
+            fds[x].revents= POLLIN;
+            break;
 
-            default:
-              assert(0);
-              abort();
-          }
+          default:
+            assert(0);
+            abort();
         }
-        return nfds;
       }
+      return nfds;
     }
   }
 
-  set_called();
   int ret= __function.function.poll(fds, nfds, timeout);
-  reset_called();
 
   return ret;
 }

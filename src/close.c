@@ -67,11 +67,9 @@ int LIBHOSTILE_API close(int fd_)
 
   (void) pthread_once(&function_lookup_once, set_local);
 
-  if (is_called() == false && __function.frequency)
+  if (__function.frequency)
   {
-    if (false)
-    { }
-    else if (--not_until < 0 && rand() % __function.frequency)
+    if ((--not_until < 0) && !(rand() % __function.frequency))
     {
       __function._used++;
       errno= EIO;
@@ -79,9 +77,7 @@ int LIBHOSTILE_API close(int fd_)
     }
   }
 
-  set_called();
   int ret= __function.function.close(fd_);
-  reset_called();
 
   return ret;
 }

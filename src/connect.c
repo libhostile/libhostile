@@ -78,52 +78,47 @@ int LIBHOSTILE_API connect(int sockfd, const struct sockaddr *addr, socklen_t ad
 
   (void) pthread_once(&function_lookup_once, set_local);
 
-  if (is_called() == false)
+  if (__function.frequency)
   {
-    if (__function.frequency)
+    if ((--not_until < 0) && !(rand() % __function.frequency))
     {
-      if (--not_until < 0 && rand() % __function.frequency)
+      int current_errno= 0;
+      switch (rand() % 5)
       {
-        int current_errno= 0;
-        switch (rand() % 5)
-        {
-          case 0:
-            errno= EINPROGRESS;
-            return -1;
+        case 0:
+          errno= EINPROGRESS;
+          return -1;
 
-          case 1:
-            errno= EINTR;
-            return -1;
+        case 1:
+          errno= EINTR;
+          return -1;
 
-          case 2:
-            current_errno= ECONNABORTED;
-            break;
+        case 2:
+          current_errno= ECONNABORTED;
+          break;
 
-          case 3:
-            current_errno= EMFILE;
-            break;
+        case 3:
+          current_errno= EMFILE;
+          break;
 
-          case 4:
-            current_errno= ECONNRESET;
-            break;
+        case 4:
+          current_errno= ECONNRESET;
+          break;
 
-          default:
-          case 5:
-            current_errno= ETIMEDOUT;
-            break;
-        }
-
-        shutdown(sockfd, SHUT_RDWR);
-        close(sockfd);
-        errno= current_errno;
-        return -1;
+        default:
+        case 5:
+          current_errno= ETIMEDOUT;
+          break;
       }
+
+      shutdown(sockfd, SHUT_RDWR);
+      close(sockfd);
+      errno= current_errno;
+      return -1;
     }
   }
 
-  set_called();
   int ret= __function.function.connect(sockfd, addr, addrlen);
-  reset_called();
 
   return ret;
 }

@@ -39,7 +39,7 @@
 #if defined(BUILDING_LIBHOSTILE)
 # if defined(HAVE_VISIBILITY) && HAVE_VISIBILITY
 #  define LIBHOSTILE_API __attribute__ ((visibility("default")))
-#  define LIBHOSTILE_LOCAL  __attribute__ ((visibility("default")))
+#  define LIBHOSTILE_LOCAL  __attribute__ ((visibility("hidden")))
 # elif defined (__SUNPRO_C) && (__SUNPRO_C >= 0x550)
 #  define LIBHOSTILE_API __global
 #  define LIBHOSTILE_LOCAL __global
@@ -49,29 +49,13 @@
 # else
 #  define LIBHOSTILE_API
 #  define LIBHOSTILE_LOCAL
-# endif
-#else
-# if defined(BUILDING_LIBHOSTILE)
-#  if defined(HAVE_VISIBILITY) && HAVE_VISIBILITY
-#   define LIBHOSTILE_API __attribute__ ((visibility("default")))
-#   define LIBHOSTILE_LOCAL  __attribute__ ((visibility("hidden")))
-#  elif defined (__SUNPRO_C) && (__SUNPRO_C >= 0x550)
-#   define LIBHOSTILE_API __global
-#   define LIBHOSTILE_LOCAL __hidden
-#  elif defined(_MSC_VER)
-#   define LIBHOSTILE_API extern __declspec(dllexport) 
-#   define LIBHOSTILE_LOCAL
-#  else
-#   define LIBHOSTILE_API
-#   define LIBHOSTILE_LOCAL
-#  endif /* defined(HAVE_VISIBILITY) */
-# else  /* defined(BUILDING_LIBHOSTILE) */
-#  if defined(_MSC_VER)
-#   define LIBHOSTILE_API extern __declspec(dllimport) 
-#   define LIBHOSTILE_LOCAL
-#  else
-#   define LIBHOSTILE_API
-#   define LIBHOSTILE_LOCAL
-#  endif /* defined(_MSC_VER) */
-# endif /* defined(BUILDING_LIBHOSTILE) */
-#endif /* defined(BUILDING_LIBHOSTILEINTERNAL) */
+# endif /* defined(HAVE_VISIBILITY) */
+#else  /* defined(BUILDING_LIBHOSTILE) */
+# if defined(_MSC_VER)
+#  define LIBHOSTILE_API extern __declspec(dllimport) 
+#  define LIBHOSTILE_LOCAL
+# else
+#  define LIBHOSTILE_API
+#  define LIBHOSTILE_LOCAL
+# endif /* defined(_MSC_VER) */
+#endif /* defined(BUILDING_LIBHOSTILE) */

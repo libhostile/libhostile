@@ -83,28 +83,23 @@ int LIBHOSTILE_API getaddrinfo(const char *node, const char *service,
 
   (void) pthread_once(&function_lookup_once, set_local);
 
-  if (is_called() == false)
+  if (__function_getaddrinfo.frequency)
   {
-    if (__function_getaddrinfo.frequency)
+    if ((--not_until) < 0 && !(rand() % __function_getaddrinfo.frequency))
     {
-      if (--not_until < 0 && random() % __function_getaddrinfo.frequency)
-      {
 #if 0
-        perror("HOSTILE CLOSE() of socket during getaddrinfo()");
+      perror("HOSTILE CLOSE() of socket during getaddrinfo()");
 #endif
-        if (random() % 2)
-        {
-          return EAI_AGAIN;
-        }
-
-        return EAI_FAIL;
+      if (random() % 2)
+      {
+        return EAI_AGAIN;
       }
+
+      return EAI_FAIL;
     }
   }
 
-  set_called();
   int ret= (int)__function_getaddrinfo.function.getaddrinfo(node, service, hints, res);
-  reset_called();
 
   return ret;
 }

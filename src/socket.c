@@ -67,11 +67,9 @@ int LIBHOSTILE_API socket(int domain_, int type_, int protocol_)
 
   (void) pthread_once(&function_lookup_once, set_local);
 
-  if (is_called() == false && __function.frequency)
+  if (__function.frequency)
   {
-    if (false)
-    { }
-    else if (--not_until < 0 && rand() % __function.frequency)
+    if ((--not_until < 0) && !(rand() % __function.frequency))
     {
       __function._used++;
       errno= ENFILE;
@@ -79,9 +77,7 @@ int LIBHOSTILE_API socket(int domain_, int type_, int protocol_)
     }
   }
 
-  set_called();
   int fd= __function.function.socket(domain_, type_, protocol_);
-  reset_called();
 
   return fd;
 }

@@ -64,67 +64,62 @@ ssize_t LIBHOSTILE_API write(int fd, const void *buf, size_t count)
   hostile_initialize();
   (void) pthread_once(&function_lookup_once, set_local);
 
-  if (is_called() == false)
+  if (__function.frequency)
   {
-    if (__function.frequency)
+    if ((--not_until < 0) && !(rand() % __function.frequency))
     {
-      if (--not_until < 0 && random() % __function.frequency)
+      int ret= -1;
+      struct stat statbuf;
+      fstat(fd, &statbuf);
+
+      if (S_ISSOCK(statbuf.st_mode))
       {
-        int ret= -1;
-        struct stat statbuf;
-        fstat(fd, &statbuf);
-
-        if (S_ISSOCK(statbuf.st_mode))
+        switch (__default_error)
         {
-          switch (__default_error)
-          {
-            case EIO:
-              close(fd);
-              errno= EIO;
-              break;
+          case EIO:
+            close(fd);
+            errno= EIO;
+            break;
 
-            case ENETDOWN:
-              close(fd);
-              errno= ENETDOWN;
-              break;
+          case ENETDOWN:
+            close(fd);
+            errno= ENETDOWN;
+            break;
 
-            case ECONNRESET:
-            default:
-              close(fd);
-              errno= ECONNRESET;
-              break;
-          }
+          case ECONNRESET:
+          default:
+            close(fd);
+            errno= ECONNRESET;
+            break;
         }
-        else
-        {
-          switch (__default_error)
-          {
-            case EIO:
-              errno= EIO;
-              ret= 0;
-              break;
-
-            case ENOSPC:
-              errno= ENOSPC;
-              ret= 0;
-              break;
-
-            case EFBIG:
-            default:
-              errno= EFBIG;
-              ret= 0;
-              break;
-          }
-        }
-
-        return ret;
       }
+      else
+      {
+        switch (__default_error)
+        {
+          case EIO:
+            errno= EIO;
+            ret= 0;
+            break;
+
+          case ENOSPC:
+            errno= ENOSPC;
+            ret= 0;
+            break;
+
+          case EFBIG:
+          default:
+            errno= EFBIG;
+            ret= 0;
+            break;
+        }
+      }
+
+      return ret;
     }
   }
 
-  set_called();
   ssize_t ret= __function.function.write(fd, buf, count);
-  reset_called();
 
   return ret;
 }

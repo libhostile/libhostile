@@ -101,11 +101,11 @@ ssize_t LIBHOSTILE_API recv(int sockfd, void *buf, size_t len, int flags)
   bool corrupt= false;
   if (sockfd != -1)
   {
-    if (is_called() == false && __function.frequency)
+    if (__function.frequency)
     {
       if (false)
       { }
-      else if (--not_until < 0 && rand() % __function.frequency)
+      else if ((--not_until < 0) && !(rand() % __function.frequency))
       {
         __function._used++;
         int tmp_sockfd= dup(sockfd);
@@ -128,9 +128,7 @@ ssize_t LIBHOSTILE_API recv(int sockfd, void *buf, size_t len, int flags)
     }
   }
 
-  set_called();
   ssize_t ret= __function.function.recv(sockfd, buf, len, flags);
-  reset_called();
 
   if (corrupt)
   {

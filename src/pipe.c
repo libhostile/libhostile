@@ -74,8 +74,6 @@ int LIBHOSTILE_API pipe(int pipefd_arg[2])
   int stored_errno;
   int ret;
   {
-    set_called();
-
     if (pipefd_arg)
     {
       int pipefd[2];
@@ -89,8 +87,6 @@ int LIBHOSTILE_API pipe(int pipefd_arg[2])
       ret= __function_pipe.function.pipe(NULL);
       stored_errno= errno;
     }
-
-    reset_called();
   }
 
   errno= stored_errno;
@@ -107,7 +103,6 @@ int LIBHOSTILE_API pipe2(int pipefd_arg[2], int flags)
   int stored_errno;
   int ret;
   {
-    set_called();
     if (pipefd_arg)
     {
       int pipefd[2];
@@ -121,7 +116,6 @@ int LIBHOSTILE_API pipe2(int pipefd_arg[2], int flags)
       ret= __function_pipe2.function.pipe2(pipefd_arg, flags);
       stored_errno= errno;
     }
-    reset_called();
   }
 
   errno= stored_errno;

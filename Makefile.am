@@ -9,7 +9,7 @@ TESTS =
 CLEANFILES =
 DISTCLEANFILES =
 bin_PROGRAMS =
-dist_bin_SCRIPTS =
+dist_bin_SCRIPTS = hostile.sh
 noinst_HEADERS =
 lib_LTLIBRARIES =
 noinst_LTLIBRARIES =
@@ -22,6 +22,9 @@ EXTRA_SCRIPTS =
 BUILT_SOURCES=
 EXTRA_DIST=
 CONFIGURE_DEPENDENCIES=
+
+hostile.sh: hostile.sh.in Makefile
+	@SED@ -e 's!@''libdir''@!$(libdir)!g' hostile.sh.in > $@
 
 #includes additional rules from aminclude.am
 @INC_AMINCLUDE@

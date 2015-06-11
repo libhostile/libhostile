@@ -1,0 +1,94 @@
+#!/bin/bash
+#
+#  Data Differential's libhostle
+#
+#  Copyright (C) 2012 Data Differential, http://datadifferential.com/
+#  Copyright (C) 2015 Andrew Hutchings <andrew@linuxjedi.co.uk>
+#
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions are
+#  met:
+#
+#      * Redistributions of source code must retain the above copyright
+#  notice, this list of conditions and the following disclaimer.
+#
+#      * Redistributions in binary form must reproduce the above
+#  copyright notice, this list of conditions and the following disclaimer
+#  in the documentation and/or other materials provided with the
+#  distribution.
+#
+#      * The names of its contributors may not be used to endorse or
+#  promote products derived from this software without specific prior
+#  written permission.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+#  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+#  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+#  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+#  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+#  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+#  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+#  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+#  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+#  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+# TODO: add .dylib support for Mac
+libhostile="@libdir@/libhostile.so"
+
+if [ ! -f "$libhostile" ]; then
+    echo "hostile: $libhostile is not installed"
+    exit 1
+fi
+
+while getopts "m:" opt; do
+    case $opt in
+        a)
+          export HOSTILE_ACCEPT=$OPTARG
+          export HOSTILE_ACCEPT4=$OPTARG
+          ;;
+        c)
+          export HOSTILE_CONNECT=$OPTARG
+          ;;
+        g)
+          export HOSTILE_GETADDRINFO=$OPTARG
+          ;;
+        m)
+          export HOSTILE_MALLOC=$OPTARG
+          ;;
+        p)
+          export HOSTILE_PIPE=$OPTARG
+          export HOSTILE_PIPE2=$OPTARG
+          ;;
+        l)
+          export HOSTILE_POLL=$OPTARG
+          ;;
+        r)
+          export HOSTILE_REALLOC=$OPTARG
+          ;;
+        e)
+          export HOSTILE_RECV=$OPTARG
+          ;;
+        s)
+          export HOSTILE_SEND=$OPTARG
+          ;;
+        t)
+          export HOSTILE_SETSOCKOPT=$OPTARG
+          ;;
+        o)
+          export HOSTILE_SOCKET=$OPTARG
+          ;;
+        w)
+          export HOSTILE_WRITE=$OPTARG
+          ;;
+        x)
+          export HOSTILE_CLOSE=$OPTARG
+          ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+export LD_PRELOAD="$libhostile $LD_PRELOAD"
+
+exec "$@"

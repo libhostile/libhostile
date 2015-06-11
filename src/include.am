@@ -16,7 +16,6 @@ lib_LTLIBRARIES+= src/libhostile.la
 
 noinst_HEADERS+= src/accept.h
 noinst_HEADERS+= src/action.h
-noinst_HEADERS+= src/called.h
 noinst_HEADERS+= src/close.h
 noinst_HEADERS+= src/connect.h
 noinst_HEADERS+= src/function.h
@@ -54,7 +53,6 @@ src_libhostile_la_LIBADD+= @RT_LIB@
 src_libhostile_la_LIBADD+= @PTHREAD_LIBS@
 
 src_libhostile_la_SOURCES+= src/accept.c
-src_libhostile_la_SOURCES+= src/called.c
 src_libhostile_la_SOURCES+= src/close.c
 src_libhostile_la_SOURCES+= src/connect.c
 src_libhostile_la_SOURCES+= src/function.c

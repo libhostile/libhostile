@@ -60,21 +60,16 @@ void LIBHOSTILE_API *realloc(void *old_ptr, size_t size)
   hostile_initialize();
   (void) pthread_once(&function_lookup_once, set_local);
 
-  if (is_called() == false)
+  if (__function.frequency)
   {
-    if (__function.frequency)
+    if ((--not_until < 0) && !(rand() % __function.frequency))
     {
-      if (--not_until < 0 && random() % __function.frequency)
-      {
-        errno= ENOMEM;
-        return NULL;
-      }
+      errno= ENOMEM;
+      return NULL;
     }
   }
 
-  set_called();
   void *ret= __function.function.realloc(old_ptr, size);
-  reset_called();
 
   return ret;
 }

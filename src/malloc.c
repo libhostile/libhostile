@@ -48,7 +48,6 @@
 static int not_until= 500;
 
 static struct function_st __function;
-static __thread char unique_ptr;
 
 static pthread_once_t function_lookup_once = PTHREAD_ONCE_INIT;
 static void set_malloc(void)
@@ -61,22 +60,17 @@ void LIBHOSTILE_API *malloc(size_t size)
   hostile_initialize();
   (void) pthread_once(&function_lookup_once, set_malloc);
 
-  if (is_called() == false)
+  if (__function.frequency)
   {
-    if (__function.frequency)
+    if ((--not_until < 0) && !(rand() % __function.frequency))
     {
-      if (--not_until < 0 && random() % __function.frequency)
-      {
-        fprintf(stderr, "Mid=evil on malloc()\n");
-        errno= ENOMEM;
-        return NULL;
-      }
+      fprintf(stderr, "Mid=evil on malloc()\n");
+      errno= ENOMEM;
+      return NULL;
     }
   }
 
-  set_called_ptr(&unique_ptr);
   void *ret= __function.function.malloc(size);
-  reset_called_ptr(&unique_ptr);
 
   return ret;
 }

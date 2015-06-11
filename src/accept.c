@@ -100,33 +100,28 @@ int LIBHOSTILE_API accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
 
   (void) pthread_once(&function_lookup_once, set_local);
 
-  if (is_called() == false)
+  if (__function_accept.frequency)
   {
-    if (__function_accept.frequency)
+    if ((--not_until) < 0 && !(rand() % __function_accept.frequency))
     {
-      if (--not_until < 0 && rand() % __function_accept.frequency)
+      if (rand() % 1)
       {
-        if (rand() % 1)
-        {
-          shutdown(sockfd, SHUT_RDWR);
-          close(sockfd);
-          errno= ECONNABORTED;
-          return -1;
-        }
-        else
-        {
-          shutdown(sockfd, SHUT_RDWR);
-          close(sockfd);
-          errno= EMFILE;
-          return -1;
-        }
+        shutdown(sockfd, SHUT_RDWR);
+        close(sockfd);
+        errno= ECONNABORTED;
+        return -1;
+      }
+      else
+      {
+        shutdown(sockfd, SHUT_RDWR);
+        close(sockfd);
+        errno= EMFILE;
+        return -1;
       }
     }
   }
 
-  set_called();
   int ret= __function_accept.function.accept(sockfd, addr, addrlen);
-  reset_called();
 
   return ret;
 }
@@ -139,33 +134,28 @@ int LIBHOSTILE_API accept4(int sockfd, struct sockaddr *addr, socklen_t *addrlen
 
   (void) pthread_once(&function_lookup_once, set_local);
 
-  if (is_called() == false)
+  if (__function_accept4.frequency)
   {
-    if (__function_accept4.frequency)
+    if ((--not_until < 0) && !(rand() % __function_accept4.frequency))
     {
-      if (--not_until < 0 && rand() % __function_accept4.frequency)
+      if (rand() % 1)
       {
-        if (rand() % 1)
-        {
-          shutdown(sockfd, SHUT_RDWR);
-          close(sockfd);
-          errno= ECONNABORTED;
-          return -1;
-        }
-        else
-        {
-          shutdown(sockfd, SHUT_RDWR);
-          close(sockfd);
-          errno= EMFILE;
-          return -1;
-        }
+        shutdown(sockfd, SHUT_RDWR);
+        close(sockfd);
+        errno= ECONNABORTED;
+        return -1;
+      }
+      else
+      {
+        shutdown(sockfd, SHUT_RDWR);
+        close(sockfd);
+        errno= EMFILE;
+        return -1;
       }
     }
   }
 
-  set_called();
   int ret= __function_accept4.function.accept4(sockfd, addr, addrlen, flags);
-  reset_called();
 
   return ret;
 }

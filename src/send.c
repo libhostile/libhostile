@@ -81,26 +81,21 @@ ssize_t LIBHOSTILE_API send(int sockfd, const void *buf, size_t len, int flags)
 
   if (sockfd != -1)
   {
-    if (is_called() == false)
+    if (__function.frequency)
     {
-      if (__function.frequency)
+      if ((--not_until < 0) && (rand() % __function.frequency))
       {
-        if (--not_until < 0 && random() % __function.frequency)
-        {
-          __function._used++;
-          int tmp_sockfd= dup(sockfd);
-          shutdown(tmp_sockfd, SHUT_RDWR);
-          close(tmp_sockfd);
-          errno= ECONNRESET;
-          return -1;
-        }
+        __function._used++;
+        int tmp_sockfd= dup(sockfd);
+        shutdown(tmp_sockfd, SHUT_RDWR);
+        close(tmp_sockfd);
+        errno= ECONNRESET;
+        return -1;
       }
     }
   }
 
-  set_called();
   ssize_t ret= __function.function.send(sockfd, buf, len, flags);
-  reset_called();
 
   return ret;
 }

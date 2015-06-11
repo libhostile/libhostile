@@ -66,3 +66,4 @@ src/.libs/
 src/t/.libs/
 src/t/hostile_close
 src/t/hostile_pipe
+hostile.sh
