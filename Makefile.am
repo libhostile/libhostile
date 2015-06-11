@@ -20,17 +20,19 @@ check_PROGRAMS =
 EXTRA_HEADERS =
 EXTRA_SCRIPTS =
 BUILT_SOURCES=
-EXTRA_DIST=
+EXTRA_DIST = hostile.sh.in
 CONFIGURE_DEPENDENCIES=
 
 hostile.sh: hostile.sh.in Makefile
-	@SED@ -e 's!@''libdir''@!$(libdir)!g' hostile.sh.in > $@
+	@SED@ -e 's!@''libdir''@!$(libdir)!g' $(srcdir)/hostile.sh.in > $@
+
+DISTCLEANFILES+= hostile.sh
 
 #includes additional rules from aminclude.am
 @INC_AMINCLUDE@
 DISTCLEANFILES+= aminclude.am
 
-EXTRA_DIST+= README
+EXTRA_DIST+= README.md
 EXTRA_DIST+= LICENSE
 
 aclocaldir= $(datadir)/aclocal
@@ -41,6 +43,7 @@ TESTS+= ${check_PROGRAMS}
 include m4/include.am
 include src/include.am
 include docs/include.am
+include libtest/include.am
 
 dist_bin_SCRIPTS+= @GENERIC_CONFIG@
 DISTCLEANFILES+= @GENERIC_CONFIG@

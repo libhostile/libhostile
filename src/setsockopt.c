@@ -3,6 +3,7 @@
  *  Data Differential's libhostle
  *
  *  Copyright (C) 2012 Data Differential, http://datadifferential.com/
+ *  Copyright (C) 2015 Andrew Hutchings <andrew@linuxjedi.co.uk>
  *
  *  Redistribution and use in source and binary forms, with or without
  *  modification, are permitted provided that the following conditions are
