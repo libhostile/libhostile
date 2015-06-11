@@ -8,3 +8,4 @@ script:
     - autoreconf -fi
     - ./configure
     - make distcheck
+    - make html
