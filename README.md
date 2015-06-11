@@ -6,4 +6,4 @@ A lightweight library to be used with `LD_PRELOAD` which will intentially break 
 
 The tool was originally designed by [Data Differential](http://www.datadifferential.com/) as part of [Gearman](http://gearman.org/) but is now being continued as an independent project maintained by [Andrew Hutchings](https://github.com/LinuxJedi).
 
-Documentation and more improvements coming soon.
+Documentation: [![Documentation Status](https://readthedocs.org/projects/libhostile/badge/?version=latest)](https://readthedocs.org/projects/libhostile/?badge=latest)
