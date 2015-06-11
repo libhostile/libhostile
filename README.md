@@ -7,4 +7,5 @@ A lightweight library to be used with `LD_PRELOAD` which will intentially break 
 The tool was originally designed by [Data Differential](http://www.datadifferential.com/) as part of [Gearman](http://gearman.org/) but is now being continued as an independent project maintained by [Andrew Hutchings](https://github.com/LinuxJedi).
 
 Documentation: <http://libhostile.readthedocs.org/>
+
 Travis CI: [![Build Status](https://travis-ci.org/libhostile/libhostile.svg)](https://travis-ci.org/libhostile/libhostile)
