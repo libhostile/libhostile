@@ -41,7 +41,7 @@ if [ ! -f "$libhostile" ]; then
     exit 1
 fi
 
-while getopts "m:" opt; do
+while getopts "a:c:g:m:p:l:r:e:s:t:o:w:x:" opt; do
     case $opt in
         a)
           export HOSTILE_ACCEPT=$OPTARG
