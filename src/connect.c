@@ -84,7 +84,7 @@ int LIBHOSTILE_API connect(int sockfd, const struct sockaddr *addr, socklen_t ad
     if ((--not_until < 0) && !(rand() % __function.frequency))
     {
       int current_errno= 0;
-      switch (rand() % 5)
+      switch (rand() % 6)
       {
         case 0:
           errno= EINPROGRESS;

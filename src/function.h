@@ -38,15 +38,31 @@
 
 #include <src/accept.h>
 #include <src/action.h>
+#include <src/bind.h>
+#include <src/calloc.h>
 #include <src/close.h>
 #include <src/connect.h>
+#include <src/fclose.h>
+#include <src/fcntl.h>
+#include <src/fopen.h>
+#include <src/fread.h>
 #include <src/getaddrinfo.h>
+#include <src/gethostbyname.h>
+#include <src/getrandom.h>
+#include <src/getsockopt.h>
+#include <src/listen.h>
 #include <src/malloc.h>
+#include <src/open.h>
 #include <src/pipe.h>
 #include <src/poll.h>
+#include <src/read.h>
 #include <src/realloc.h>
 #include <src/recv.h>
+#include <src/recvfrom.h>
+#include <src/select.h>
 #include <src/send.h>
+#include <src/sendmsg.h>
+#include <src/sendto.h>
 #include <src/socket.h>
 #include <src/setsockopt.h>
 #include <src/write.h>
@@ -54,16 +70,34 @@
 union function_un {
   accept_fn *accept;
   accept4_fn *accept4;
+  bind_fn *bind;
+  calloc_fn *calloc;
   close_fn *close;
   connect_fn *connect;
+  fclose_fn *fclose;
+  fcntl_fn *fcntl;
+  fopen_fn *fopen;
+  fread_fn *fread;
   getaddrinfo_fn *getaddrinfo;
+  gethostbyname_fn *gethostbyname;
+#ifdef __linux__
+  getrandom_fn *getrandom;
+#endif
+  getsockopt_fn *getsockopt;
+  listen_fn *listen;
   malloc_fn *malloc;
+  open_fn *open;
   poll_fn *poll;
   pipe_fn *pipe;
   pipe2_fn *pipe2;
+  read_fn *read;
   realloc_fn *realloc;
   recv_fn *recv;
+  recvfrom_fn *recvfrom;
+  select_fn *select;
   send_fn *send;
+  sendmsg_fn *sendmsg;
+  sendto_fn *sendto;
   setsockopt_fn *setsockopt;
   socket_fn *socket;
   write_fn *write;

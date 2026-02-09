@@ -89,7 +89,7 @@ int poll(struct pollfd *fds, nfds_t nfds, int timeout)
   {
     if ((--not_until) < 0 && !(rand() % __function.frequency))
     {
-      for (nfds_t x= 0; x < nfds; nfds++)
+      for (nfds_t x= 0; x < nfds; x++)
       {
         switch (hostile_poll_type)
         {

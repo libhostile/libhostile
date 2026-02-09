@@ -84,7 +84,7 @@ ssize_t LIBHOSTILE_API send(int sockfd, const void *buf, size_t len, int flags)
   {
     if (__function.frequency)
     {
-      if ((--not_until < 0) && (rand() % __function.frequency))
+      if ((--not_until < 0) && !(rand() % __function.frequency))
       {
         __function._used++;
         int tmp_sockfd= dup(sockfd);

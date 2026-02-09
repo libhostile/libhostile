@@ -35,6 +35,14 @@ The above will tell libhostile to return an error for roughly 1/500 ``malloc()``
 
    Become hostile to ``accept4()`` calls
 
+.. envvar:: HOSTILE_BIND
+
+   Become hostile to ``bind()`` calls. Injects ``EADDRINUSE``, ``EACCES``, or ``EADDRNOTAVAIL``.
+
+.. envvar:: HOSTILE_CALLOC
+
+   Become hostile to ``calloc()`` calls. Returns ``NULL`` with ``ENOMEM``.
+
 .. envvar:: HOSTILE_CLOSE
 
    Become hostile to ``close()`` calls
@@ -43,13 +51,49 @@ The above will tell libhostile to return an error for roughly 1/500 ``malloc()``
 
    Become hostile to ``connect()`` calls
 
+.. envvar:: HOSTILE_FCLOSE
+
+   Become hostile to ``fclose()`` calls. Calls the real ``fclose()`` first, then returns ``EOF`` with ``EIO``.
+
+.. envvar:: HOSTILE_FCNTL
+
+   Become hostile to ``fcntl()`` calls. Only affects ``F_GETFL`` and ``F_SETFL`` operations. Injects ``EBADF`` or ``EINVAL``.
+
+.. envvar:: HOSTILE_FOPEN
+
+   Become hostile to ``fopen()`` calls. Injects ``EMFILE``, ``ENOENT``, or ``EACCES``.
+
+.. envvar:: HOSTILE_FREAD
+
+   Become hostile to ``fread()`` calls. Returns 0 or a short read (half the requested count).
+
 .. envvar:: HOSTILE_GETADDRINFO
 
    Become hostile to ``getaddrinfo()`` calls
 
+.. envvar:: HOSTILE_GETHOSTBYNAME
+
+   Become hostile to ``gethostbyname()`` calls. Returns ``NULL`` with ``HOST_NOT_FOUND`` or ``TRY_AGAIN`` via ``h_errno``.
+
+.. envvar:: HOSTILE_GETRANDOM
+
+   Become hostile to ``getrandom()`` calls (Linux only). Injects ``ENOSYS``, ``EINTR``, ``EAGAIN``, or returns a short read.
+
+.. envvar:: HOSTILE_GETSOCKOPT
+
+   Become hostile to ``getsockopt()`` calls. Injects ``EBADF`` or ``ENOPROTOOPT``.
+
+.. envvar:: HOSTILE_LISTEN
+
+   Become hostile to ``listen()`` calls. Injects ``EADDRINUSE`` or ``EBADF``.
+
 .. envvar:: HOSTILE_MALLOC
 
    Become hostile to ``malloc()`` calls
+
+.. envvar:: HOSTILE_OPEN
+
+   Become hostile to ``open()`` calls. Injects ``EMFILE``, ``ENOENT``, or ``EACCES``.
 
 .. envvar:: HOSTILE_PIPE
 
@@ -63,6 +107,10 @@ The above will tell libhostile to return an error for roughly 1/500 ``malloc()``
 
    Become hostile to ``poll()`` calls
 
+.. envvar:: HOSTILE_READ
+
+   Become hostile to ``read()`` calls. For sockets injects ``ECONNRESET``, ``EOF``, or ``EINTR``. For files/devices injects ``EIO`` or a short read.
+
 .. envvar:: HOSTILE_REALLOC
 
    Become hostile to ``realloc()`` calls
@@ -71,9 +119,25 @@ The above will tell libhostile to return an error for roughly 1/500 ``malloc()``
 
    Become hostile to ``recv()`` calls
 
+.. envvar:: HOSTILE_RECVFROM
+
+   Become hostile to ``recvfrom()`` calls. Injects ``ECONNREFUSED``, ``EOF``, ``EINTR``, ``EAGAIN``, or ``ENOMEM``.
+
+.. envvar:: HOSTILE_SELECT
+
+   Become hostile to ``select()`` calls. Injects timeout (returns 0), ``EINTR``, or ``EBADF``.
+
 .. envvar:: HOSTILE_SEND
 
    Become hostile to ``send()`` calls
+
+.. envvar:: HOSTILE_SENDMSG
+
+   Become hostile to ``sendmsg()`` calls. Injects ``ECONNRESET``, ``EMSGSIZE``, or ``EAGAIN``.
+
+.. envvar:: HOSTILE_SENDTO
+
+   Become hostile to ``sendto()`` calls. Injects ``ECONNRESET``, ``ENETUNREACH``, ``EMSGSIZE``, ``EAGAIN``, or a short write.
 
 .. envvar:: HOSTILE_SETSOCKOPT
 
