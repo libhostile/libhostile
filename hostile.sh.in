@@ -41,48 +41,96 @@ if [ ! -f "$libhostile" ]; then
     exit 1
 fi
 
-while getopts "a:c:g:m:p:l:r:e:s:t:o:w:x:" opt; do
+while getopts "a:b:c:C:d:D:e:f:F:g:G:H:k:l:m:M:n:o:O:p:r:R:s:S:t:T:w:x:X:" opt; do
     case $opt in
         a)
           export HOSTILE_ACCEPT=$OPTARG
           export HOSTILE_ACCEPT4=$OPTARG
           ;;
+        b)
+          export HOSTILE_BIND=$OPTARG
+          ;;
         c)
           export HOSTILE_CONNECT=$OPTARG
+          ;;
+        C)
+          export HOSTILE_CALLOC=$OPTARG
+          ;;
+        d)
+          export HOSTILE_READ=$OPTARG
+          ;;
+        D)
+          export HOSTILE_FREAD=$OPTARG
+          ;;
+        e)
+          export HOSTILE_RECV=$OPTARG
+          ;;
+        f)
+          export HOSTILE_FCNTL=$OPTARG
+          ;;
+        F)
+          export HOSTILE_FOPEN=$OPTARG
           ;;
         g)
           export HOSTILE_GETADDRINFO=$OPTARG
           ;;
+        G)
+          export HOSTILE_GETRANDOM=$OPTARG
+          ;;
+        H)
+          export HOSTILE_GETHOSTBYNAME=$OPTARG
+          ;;
+        k)
+          export HOSTILE_GETSOCKOPT=$OPTARG
+          ;;
+        l)
+          export HOSTILE_POLL=$OPTARG
+          ;;
         m)
           export HOSTILE_MALLOC=$OPTARG
+          ;;
+        M)
+          export HOSTILE_SENDMSG=$OPTARG
+          ;;
+        n)
+          export HOSTILE_LISTEN=$OPTARG
+          ;;
+        o)
+          export HOSTILE_SOCKET=$OPTARG
+          ;;
+        O)
+          export HOSTILE_OPEN=$OPTARG
           ;;
         p)
           export HOSTILE_PIPE=$OPTARG
           export HOSTILE_PIPE2=$OPTARG
           ;;
-        l)
-          export HOSTILE_POLL=$OPTARG
-          ;;
         r)
           export HOSTILE_REALLOC=$OPTARG
           ;;
-        e)
-          export HOSTILE_RECV=$OPTARG
+        R)
+          export HOSTILE_RECVFROM=$OPTARG
           ;;
         s)
           export HOSTILE_SEND=$OPTARG
           ;;
+        S)
+          export HOSTILE_SELECT=$OPTARG
+          ;;
         t)
           export HOSTILE_SETSOCKOPT=$OPTARG
           ;;
-        o)
-          export HOSTILE_SOCKET=$OPTARG
+        T)
+          export HOSTILE_SENDTO=$OPTARG
           ;;
         w)
           export HOSTILE_WRITE=$OPTARG
           ;;
         x)
           export HOSTILE_CLOSE=$OPTARG
+          ;;
+        X)
+          export HOSTILE_FCLOSE=$OPTARG
           ;;
     esac
 done

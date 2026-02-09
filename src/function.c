@@ -48,12 +48,12 @@
 #include <stdlib.h>
 
 static int64_t function_cache_index= 0;
-struct function_st function_cache[20];
+struct function_st function_cache[40];
 
 void print_function_cache_usage(void)
 {
   for (struct function_st *ptr= function_cache;
-       ptr->name == NULL; ptr++)
+       ptr->name != NULL; ptr++)
   {
     if (ptr->frequency)
     {
@@ -81,12 +81,6 @@ struct function_st set_function(const char *name, const char *environ_name)
   }
 
   set._corrupt= false;
-
-  if (set.function.ptr == NULL)
-  {
-    fprintf(stderr, "libhostile: %s(%s)", set.name, dlerror());
-    exit(EXIT_FAILURE);
-  }
 
   char *ptr;
   if ((ptr= getenv(environ_name)))

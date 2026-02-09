@@ -105,7 +105,7 @@ int LIBHOSTILE_API accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
   {
     if ((--not_until) < 0 && !(rand() % __function_accept.frequency))
     {
-      if (rand() % 1)
+      if (rand() % 2)
       {
         shutdown(sockfd, SHUT_RDWR);
         close(sockfd);
@@ -139,7 +139,7 @@ int LIBHOSTILE_API accept4(int sockfd, struct sockaddr *addr, socklen_t *addrlen
   {
     if ((--not_until < 0) && !(rand() % __function_accept4.frequency))
     {
-      if (rand() % 1)
+      if (rand() % 2)
       {
         shutdown(sockfd, SHUT_RDWR);
         close(sockfd);

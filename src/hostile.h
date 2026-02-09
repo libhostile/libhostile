@@ -85,6 +85,51 @@ LIBHOSTILE_API
 LIBHOSTILE_API
   void set_getaddrinfo_error(bool arg, int frequency, int not_until_arg);
 
+LIBHOSTILE_API
+  void set_select_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_recvfrom_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_sendto_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_read_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_fcntl_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_bind_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_listen_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_getsockopt_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_fopen_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_fread_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_open_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_getrandom_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_gethostbyname_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_sendmsg_error(bool arg, int frequency, int not_until_arg);
+
+LIBHOSTILE_API
+  void set_fclose_error(bool arg, int frequency, int not_until_arg);
+
 #ifdef __cplusplus
 }
 #endif

@@ -99,7 +99,7 @@ ssize_t LIBHOSTILE_API recv(int sockfd, void *buf, size_t len, int flags)
 
   (void) pthread_once(&function_lookup_once, set_local);
 
-  bool corrupt= false;
+  bool corrupt= __function._corrupt;
   if (sockfd != -1)
   {
     if (__function.frequency)
@@ -131,9 +131,9 @@ ssize_t LIBHOSTILE_API recv(int sockfd, void *buf, size_t len, int flags)
 
   ssize_t ret= __function.function.recv(sockfd, buf, len, flags);
 
-  if (corrupt)
+  if (corrupt && ret > 0)
   {
-    memset(buf, 'd', len);
+    memset(buf, 'd', ret);
   }
 
   return ret;
