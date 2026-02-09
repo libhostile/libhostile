@@ -21,17 +21,53 @@ With all the below options the ``frequency`` is roughly how often the call shoul
 
    Become hostile on ``accept()`` and ``accept4()`` calls.
 
+.. option:: -b frequency
+
+   Become hostile on ``bind()`` calls
+
 .. option:: -c frequency
 
    Become hostile on ``connect()`` calls
+
+.. option:: -C frequency
+
+   Become hostile on ``calloc()`` calls
+
+.. option:: -d frequency
+
+   Become hostile on ``read()`` calls
+
+.. option:: -D frequency
+
+   Become hostile on ``fread()`` calls
 
 .. option:: -e frequency
 
    Become hostile on ``recv()`` calls
 
+.. option:: -f frequency
+
+   Become hostile on ``fcntl()`` calls
+
+.. option:: -F frequency
+
+   Become hostile on ``fopen()`` calls
+
 .. option:: -g frequency
 
    Become hostile on ``getaddrinfo()`` calls
+
+.. option:: -G frequency
+
+   Become hostile on ``getrandom()`` calls (Linux only)
+
+.. option:: -H frequency
+
+   Become hostile on ``gethostbyname()`` calls
+
+.. option:: -k frequency
+
+   Become hostile on ``getsockopt()`` calls
 
 .. option:: -l frequency
 
@@ -41,9 +77,21 @@ With all the below options the ``frequency`` is roughly how often the call shoul
 
    Become hostile on ``malloc()`` calls
 
+.. option:: -M frequency
+
+   Become hostile on ``sendmsg()`` calls
+
+.. option:: -n frequency
+
+   Become hostile on ``listen()`` calls
+
 .. option:: -o frequency
 
    Become hostile on ``socket()`` calls
+
+.. option:: -O frequency
+
+   Become hostile on ``open()`` calls
 
 .. option:: -p frequency
 
@@ -53,13 +101,25 @@ With all the below options the ``frequency`` is roughly how often the call shoul
 
    Become hostile on ``realloc()`` calls
 
+.. option:: -R frequency
+
+   Become hostile on ``recvfrom()`` calls
+
 .. option:: -s frequency
 
    Become hostile on ``send()`` calls
 
+.. option:: -S frequency
+
+   Become hostile on ``select()`` calls
+
 .. option:: -t frequency
 
    Become hostile on ``setsockopt()`` calls
+
+.. option:: -T frequency
+
+   Become hostile on ``sendto()`` calls
 
 .. option:: -w frequency
 
@@ -68,3 +128,7 @@ With all the below options the ``frequency`` is roughly how often the call shoul
 .. option:: -x frequency
 
    Become hostile on ``close()`` calls
+
+.. option:: -X frequency
+
+   Become hostile on ``fclose()`` calls
